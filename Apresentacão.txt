@@ -1,0 +1,7 @@
+Meu nome é Matheus, tenho 18 anos e atualmente trabalho como assistente de sistemas em uma empresa de engenharia. Já atuo com automações e no desenvolvimento de ferramentas internas, o que tem contribuído bastante para meu aprendizado prático.
+
+Minha expectativa com o curso é me especializar em Java. Já estudei os fundamentos da linguagem, incluindo Programação Orientada a Objetos (POO), e venho explorando o framework Spring, com foco na construção de APIs REST. Tenho grande interesse em entender melhor a integração entre o backend em Java e o frontend, especialmente utilizando Angular.
+
+Além do aprendizado técnico, espero também ampliar meu networking dentro do ambiente proporcionado pelo curso e, se possível, conquistar uma oportunidade de trabalho em uma empresa focada em tecnologia.
+
+Tenho um interesse especial pela Premiersoft, onde trabalhei como menor aprendiz há dois anos. Admiro muito a cultura da empresa e acredito que o modelo de trabalho que adotam é ideal para quem busca adquirir experiência de forma rápida e consistente.
