@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz Interativo - Aula 04</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="main-header">
+    <h1>🧠 Quiz Interativo</h1>
+    <p>Teste seus conhecimentos com 5 perguntas selecionadas aleatoriamente!</p>
+  </header>
+
+  <div class="quiz-container">
+    <div class="quiz-progress">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <span class="progress-text">Perguntas respondidas: <span id="progressCount">0</span>/5</span>
+    </div>
+
+    <form id="quizForm"></form>
+    
+    <div class="quiz-actions">
+      <button id="enviarRespostas" class="btn-primary quiz-submit">
+        ✅ Enviar Respostas
+      </button>
+      <a href="index.html" class="btn-secondary back-button">
+        ← Voltar ao Menu
+      </a>
+    </div>
+    
+    <div id="resultadoQuiz" class="result-box quiz-result"></div>
+  </div>
+
+  <style>
+    .quiz-container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      width: 90%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .quiz-progress {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(102, 126, 234, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      width: 0%;
+      transition: width 0.3s ease;
+      border-radius: 10px;
+    }
+
+    .progress-text {
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .question {
+      margin-bottom: 30px;
+      padding: 25px;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      border-radius: 15px;
+      border: 1px solid rgba(255,255,255,0.5);
+      transition: all 0.3s ease;
+    }
+
+    .question:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .question h3 {
+      margin-bottom: 20px;
+      color: #2c3e50;
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .question label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 12px 15px;
+      background: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .question label:hover {
+      background: #f8f9fa;
+      border-color: #667eea;
+      transform: translateX(5px);
+    }
+
+    .question input[type="radio"] {
+      margin-right: 12px;
+      width: 18px;
+      height: 18px;
+      accent-color: #667eea;
+    }
+
+    .quiz-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .quiz-submit {
+      flex: 2;
+      min-width: 200px;
+    }
+
+    .back-button {
+      flex: 1;
+      min-width: 150px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+      color: white;
+    }
+
+    .back-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(127, 140, 141, 0.4);
+    }
+
+    .quiz-result {
+      font-size: 1.3rem;
+      padding: 25px;
+      margin-top: 30px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    @media (max-width: 768px) {
+      .quiz-container {
+        width: 95%;
+        padding: 25px;
+      }
+      
+      .quiz-actions {
+        flex-direction: column;
+      }
+      
+      .quiz-submit, .back-button {
+        flex: none;
+        width: 100%;
+      }
+      
+      .question {
+        padding: 20px;
+      }
+      
+      .question h3 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+
+  <script>
+    const perguntas = [
+      {
+        pergunta: "Qual a capital do Brasil?",
+        opcoes: ["Rio de Janeiro", "São Paulo", "Brasília", "Belo Horizonte"],
+        correta: 2
+      },
+      {
+        pergunta: "Qual é o maior planeta do sistema solar?",
+        opcoes: ["Terra", "Saturno", "Júpiter", "Marte"],
+        correta: 2
+      },
+      {
+        pergunta: "Quem pintou a Mona Lisa?",
+        opcoes: ["Michelangelo", "Leonardo da Vinci", "Van Gogh", "Picasso"],
+        correta: 1
+      },
+      {
+        pergunta: "Quanto é 9 x 9?",
+        opcoes: ["81", "72", "99", "90"],
+        correta: 0
+      },
+      {
+        pergunta: "Qual o elemento químico do ouro?",
+        opcoes: ["O", "Ag", "Au", "Gd"],
+        correta: 2
+      },
+      {
+        pergunta: "Quem escreveu 'Dom Casmurro'?",
+        opcoes: ["Machado de Assis", "Clarice Lispector", "José de Alencar", "Graciliano Ramos"],
+        correta: 0
+      },
+      {
+        pergunta: "Qual é a velocidade da luz?",
+        opcoes: ["300.000 km/s", "150.000 km/s", "1.080 km/h", "100.000 km/s"],
+        correta: 0
+      },
+      {
+        pergunta: "Qual o maior oceano da Terra?",
+        opcoes: ["Atlântico", "Pacífico", "Índico", "Ártico"],
+        correta: 1
+      },
+      {
+        pergunta: "Quantos lados tem um hexágono?",
+        opcoes: ["5", "6", "7", "8"],
+        correta: 1
+      },
+      {
+        pergunta: "Quem descobriu o Brasil?",
+        opcoes: ["Dom Pedro I", "Pedro Álvares Cabral", "Cristóvão Colombo", "Tiradentes"],
+        correta: 1
+      }
+    ];
+
+    const perguntasAleatorias = perguntas.sort(() => 0.5 - Math.random()).slice(0, 5);
+    const quizForm = document.getElementById('quizForm');
+    const progressFill = document.getElementById('progressFill');
+    const progressCount = document.getElementById('progressCount');
+
+    perguntasAleatorias.forEach((p, index) => {
+      const div = document.createElement('div');
+      div.className = 'question';
+
+      const titulo = document.createElement('h3');
+      titulo.innerText = `${index + 1}. ${p.pergunta}`;
+      div.appendChild(titulo);
+
+      p.opcoes.forEach((opcao, i) => {
+        const label = document.createElement('label');
+        label.innerHTML = `
+          <input type="radio" name="q${index}" value="${i}" required>
+          ${opcao}
+        `;
+        div.appendChild(label);
+      });
+
+      quizForm.appendChild(div);
+    });
+
+    function updateProgress() {
+      const totalAnswered = document.querySelectorAll('input[type="radio"]:checked').length;
+      const percentage = (totalAnswered / 5) * 100;
+      progressFill.style.width = percentage + '%';
+      progressCount.textContent = totalAnswered;
+    }
+
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', updateProgress);
+    });
+
+    document.getElementById('enviarRespostas').addEventListener('click', function (e) {
+      e.preventDefault();
+      
+      const totalAnswered = document.querySelectorAll('input[type="radio"]:checked').length;
+      
+      if (totalAnswered < 5) {
+        alert('⚠️ Por favor, responda todas as perguntas antes de enviar!');
+        return;
+      }
+
+      let acertos = 0;
+      const resultados = [];
+
+      perguntasAleatorias.forEach((p, index) => {
+        const resposta = document.querySelector(`input[name="q${index}"]:checked`);
+        if (resposta && parseInt(resposta.value) === p.correta) {
+          acertos++;
+          resultados.push(`✅ Pergunta ${index + 1}: Correto`);
+        } else {
+          resultados.push(`❌ Pergunta ${index + 1}: Incorreto`);
+        }
+      });
+
+      let mensagemFinal = '';
+      let emoji = '';
+      
+      if (acertos === 5) {
+        emoji = '🏆';
+        mensagemFinal = 'Perfeito! Você é um gênio!';
+      } else if (acertos >= 3) {
+        emoji = '👏';
+        mensagemFinal = 'Muito bem! Bom desempenho!';
+      } else {
+        emoji = '📚';
+        mensagemFinal = 'Continue estudando!';
+      }
+
+      document.getElementById('resultadoQuiz').innerHTML = `
+        <div style="text-align: center; line-height: 1.6;">
+          <div style="font-size: 3rem; margin-bottom: 15px;">${emoji}</div>
+          <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 10px;">
+            Você acertou ${acertos} de 5 perguntas!
+          </div>
+          <div style="font-size: 1.1rem; margin-bottom: 20px;">
+            ${mensagemFinal}
+          </div>
+          <div style="font-size: 1rem; opacity: 0.9;">
+            Pontuação: ${((acertos / 5) * 100).toFixed(0)}%
+          </div>
+        </div>
+      `;
+
+      document.getElementById('resultadoQuiz').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'center'
+      });
+    });
+  </script>
+</body>
+</html>

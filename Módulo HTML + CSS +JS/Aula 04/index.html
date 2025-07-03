@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Aula 04 - Calculadoras Interativas</title>
+</head>
+<body>
+    <header class="main-header">
+        <h1>🚀 Calculadoras Interativas</h1>
+        <p>Explore diferentes ferramentas de cálculo e diversão</p>
+    </header>
+
+    <div class="content">
+        <div class="row1">
+            <div class="containerNotas">
+                <div class="card-header">
+                    <h2>📊 Calculadora de Média</h2>
+                </div>
+
+                <form id="formNotas">
+                    <div class="input-group">
+                        <label for="nota1">Nota 1:</label>
+                        <input type="number" id="nota1" step="0.1" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="nota2">Nota 2:</label>
+                        <input type="number" id="nota2" step="0.1" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="nota3">Nota 3:</label>
+                        <input type="number" id="nota3" step="0.1" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Calcular Média</button>
+                </form>
+
+                <div id="resultadoNotas" class="result-box"></div>
+            </div>
+
+            <div class="containerConversor">
+                <div class="card-header">
+                    <h2>💰 Conversor de Moedas</h2>
+                </div>
+            
+                <form id="formConversor">
+                    <div class="input-group">
+                        <label for="valor">Valor em Real (R$):</label>
+                        <input type="number" id="valor" step="0.01" required>
+                    </div>
+            
+                    <div class="input-group">
+                        <label for="moeda">Converter para:</label>
+                        <select id="moeda" required>
+                            <option value="dolar">🇺🇸 Dólar</option>
+                            <option value="euro">🇪🇺 Euro</option>
+                            <option value="libra">🇬🇧 Libra</option>
+                            <option value="bitcoin">₿ Bitcoin</option>
+                        </select>
+                    </div>
+            
+                    <button type="submit" class="btn-primary">Converter</button>
+                </form>
+            
+                <div id="resultadoConversao" class="result-box"></div>
+            </div>
+
+            <div class="containerAdivinhacao">
+                <div class="card-header">
+                    <h2>🎯 Adivinhe o Número!</h2>
+                </div>
+                <p class="card-description">Digite um número entre 1 e 100:</p>
+
+                <form id="formAdivinha">
+                    <div class="input-group">
+                        <input type="number" id="tentativa" min="1" max="100" required placeholder="Seu chute...">
+                    </div>
+                    <button type="submit" class="btn-primary">Chutar</button>
+                </form>
+
+                <div id="mensagem" class="result-box"></div>
+            </div>
+
+            <div class="containerAnoBissexto">
+                <div class="card-header">
+                    <h2>📅 Ano Bissexto</h2>
+                </div>
+                <p class="card-description">Digite um ano para verificar se é bissexto:</p>
+
+                <form id="formAno">
+                    <div class="input-group">
+                        <input type="number" id="ano" required placeholder="Ex: 2024">
+                    </div>
+                    <button type="submit" class="btn-primary">Verificar</button>
+                </form>
+
+                <div id="resultadoAno" class="result-box"></div>
+            </div>
+        </div>
+        
+        <div class="row2">
+            <div class="containerTabuada">
+                <div class="card-header">
+                    <h2>📘 Tabuada</h2>
+                </div>
+                <p class="card-description">Digite um número para ver sua tabuada:</p>
+
+                <form id="formTabuada">
+                    <div class="input-group">
+                        <input type="number" id="numero" required placeholder="Ex: 7">
+                    </div>
+                    <button type="submit" class="btn-primary">Mostrar Tabuada</button>
+                </form>
+
+                <div id="resultadoTabuada" class="result-box tabuada-result"></div>
+            </div>
+
+            <div class="containerCalcFatorial">
+                <div class="card-header">
+                    <h2>🔢 Calculadora de Fatorial</h2>
+                </div>
+                <p class="card-description">Informe um número inteiro positivo:</p>
+
+                <form id="formFatorial">
+                    <div class="input-group">
+                        <input type="number" id="numeroFatorial" min="0" required placeholder="Ex: 5">
+                    </div>
+                    <button type="submit" class="btn-primary">Calcular Fatorial</button>
+                </form>
+
+                <div id="resultadoFatorial" class="result-box"></div>
+            </div>
+
+            <div class="containerCalcIMC">
+                <div class="card-header">
+                    <h2>⚖️ Calculadora de IMC</h2>
+                </div>
+                <p class="card-description">Informe seus dados:</p>
+
+                <form id="formIMC">
+                    <div class="input-group">
+                        <label for="peso">Peso (kg):</label>
+                        <input type="number" id="peso" step="0.1" required placeholder="Ex: 70.5">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="altura">Altura (m):</label>
+                        <input type="number" id="altura" step="0.01" required placeholder="Ex: 1.75">
+                    </div>
+
+                    <button type="submit" class="btn-primary">Calcular IMC</button>
+                </form>
+
+                <div id="resultadoIMC" class="result-box"></div>
+            </div>
+
+            <div class="containerQuiz">
+                <div class="card-header">
+                    <h2>🧠 Quiz Aleatório</h2>
+                </div>
+                <p class="card-description">Teste seus conhecimentos com 5 perguntas aleatórias!</p>
+                <a href="quiz.html" class="quiz-link">
+                    <button class="btn-secondary">Iniciar Quiz</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="main-footer">
+        <p>© 2025 - Calculadoras Interativas | Desenvolvido com ❤️</p>
+    </footer>
+</body>
+</html>
