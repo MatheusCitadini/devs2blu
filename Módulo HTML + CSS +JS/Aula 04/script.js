@@ -1,6 +1,6 @@
 document.getElementById('formNotas').addEventListener('submit', function(event) {
   event.preventDefault();
-
+  //Notas
   const n1 = parseFloat(document.getElementById('nota1').value);
   const n2 = parseFloat(document.getElementById('nota2').value);
   const n3 = parseFloat(document.getElementById('nota3').value);
@@ -10,6 +10,7 @@ document.getElementById('formNotas').addEventListener('submit', function(event) 
   let emoji = '';
   let cor = '';
 
+  //regras para aprovacao no curso
   if (media >= 7) {
     situacao = 'Aprovado';
     emoji = '✅';
@@ -23,7 +24,7 @@ document.getElementById('formNotas').addEventListener('submit', function(event) 
     emoji = '❌';
     cor = '#e74c3c';
   }
-
+  //mensagem de resultado
   const resultadoDiv = document.getElementById('resultadoNotas');
   resultadoDiv.innerHTML = `
     <div style="text-align: center; padding: 20px; background: ${cor}; color: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
@@ -41,6 +42,7 @@ document.getElementById('formNotas').addEventListener('submit', function(event) 
     resultadoDiv.style.transform = 'translateY(0)';
   }, 100);
 });
+
 
 document.getElementById('formConversor').addEventListener('submit', function(event) {
   event.preventDefault();
@@ -97,6 +99,7 @@ document.getElementById('formConversor').addEventListener('submit', function(eve
   }, 100);
 });
 
+//cria o número 
 const numeroSecreto = Math.floor(Math.random() * 100) + 1;
 let tentativas = 0;
 let jogoAcabou = false;

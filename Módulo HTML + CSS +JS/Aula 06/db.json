@@ -1,0 +1,22 @@
+{
+  "enderecos": [
+    {
+      "nome": "Pedro OliveiraA",
+      "cep": "30112-000",
+      "estado": "MG",
+      "cidade": "Belo Horizonte",
+      "bairro": "Centro",
+      "logradouro": "Avenida Afonso Pena",
+      "id": "2"
+    },
+    {
+      "nome": "Júlia Jennrich A",
+      "cep": "89055-000",
+      "estado": "SC",
+      "cidade": "Blumenau",
+      "bairro": "Fortaleza",
+      "logradouro": "Rua Júlio Michel",
+      "id": "4"
+    }
+  ]
+}
